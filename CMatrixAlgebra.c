@@ -14,7 +14,7 @@ struct Matrix{
 		this->tipo=t;
 		setSize(this->tipo);
 	}
-	void setSize(char t)
+	public:void setSize(char t)
 	{
 		if(t=='i')
 		{
