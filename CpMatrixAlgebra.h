@@ -14,7 +14,7 @@ struct Matrix{
 		this->tipo=t;
 		setSize(this->tipo);
 	}
-	public:void setSize(char t)
+	void setSize(char t)
 	{
 		if(t=='i')
 		{
@@ -56,7 +56,7 @@ struct Matrix{
 			}
 		}
 	}
-	void printM()
+	void set1toN()
 	{
 		if(this->tipo=='i')
 		{
@@ -64,7 +64,53 @@ struct Matrix{
 			{
 				for(auto int j=0; j<this->columnas; j++)
 				{
-					printf("[%d]", iM[i][j]);
+					iM[i][j]=(i*this->columnas)+(j+1);
+				}
+			}
+		}
+		else if(this->tipo=='f')
+		{
+			for(auto int i=0; i<this->filas; i++)
+			{
+				for(auto int j=0; j<this->columnas; j++)
+				{
+					fM[i][j]=(i*this->columnas)+(j+1);
+				}
+			}
+		}
+	}
+							////////DETERMINANTE
+	void determinante()
+	{
+		int sub1=-1, sub2=0;
+		//indice=(i>n)?(n-i):(i)
+		for(auto int i=0;i<(this->filas*this->columnas); i++)
+		{
+			//control de subindices
+			sub1=(i%this->filas==0)?sub1+1:sub1;
+			sub2=i%this->columnas;
+			
+			iM[sub1][sub2]=5;
+			
+			
+			//Dibujarlo
+			/*
+			printf("[%d][%d] ", sub1, sub2);
+			if(i%this->filas==4)
+				printf("\n");
+			*/	
+		}
+	}
+	void printM()
+	{
+		printf("MATRIZ");
+		if(this->tipo=='i')
+		{
+			for(auto int i=0; i<this->filas; i++)
+			{
+				for(auto int j=0; j<this->columnas; j++)
+				{
+					printf(" [%d] ", iM[i][j]);
 				}
 				printf("\n");
 			}
