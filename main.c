@@ -1,14 +1,8 @@
 #include<stdio.h>
 #include<math.h>
-#include "CMatrixAlgebra.h"
+#include "CMatrixImp.h"
 main()
 {
-	/*Matrix m = Matrix(5, 5, 'i');
-	m.determinante();
-	m.printM();*/
-	
-	setMatrix(5,5, 'i');
-	setSize();
-	setN(2);
-	printM();
+	Matrix *m= newMatrix(10, 15, 'i');
+	m->printM(m);
 }
