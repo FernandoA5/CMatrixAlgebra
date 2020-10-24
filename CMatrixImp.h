@@ -13,13 +13,25 @@ Matrix * newMatrix(int f, int c, char t){
 	m->setSize= mSetSize;
 	m->printM=mPrintM;
 	m->setN=mSetN;
+	m->avgM=mAvgM;
+	m->setByDataSet=mSetByDataSet;
+	
 	
 	
 	m->setSize(m);
 	return m;
 }
 //METODOS
-
+void mSetByDataSet(Matrix *this, char dir[])
+{
+	//ABRIMOS EL ARCHIVO
+	FILE *f=fopen(dir, "r");
+	if(f==NULL)
+	{
+		printf("ERROR AL ABRIR EL ARCHIVO");
+	}
+	char aux[6];
+}
 
 //--------------------------------ASIGNAR TAMAÑO A LA MATRIZ-----------------------------------
 void mSetSize(Matrix *this){
@@ -40,6 +52,33 @@ void mSetSize(Matrix *this){
 		}
 	}
 }
+//------------------------------------PROMEDIO------------------------------------------
+float mAvgM(Matrix *this)
+{
+	int i, j; float sum=0;
+	if(this->tipo=='i')
+	{
+		for(i=0;i<this->filas; i++)
+		{
+			for(j=0; j<this->columnas; j++)
+			{
+				sum+=this->iM[i][j];
+			}
+		}
+	}
+	else if(this->tipo=='f')
+	{
+		for(i=0;i<this->filas; i++)
+		{
+			for(j=0; j<this->columnas; j++)
+			{
+				sum+=this->fM[i][j];
+			}
+		}
+	}
+	return (sum/(this->filas*this->columnas));
+}
+//------------------------------------ASIGNAR N A TODOS LOS CAMPOS DE LA MATRIZ------------------------------------------
 void mSetN(Matrix *this, float N){
 	int i, j;
 	if(this->tipo=='i')
