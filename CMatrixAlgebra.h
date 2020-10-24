@@ -10,14 +10,14 @@ struct Matrix{
 	
 	//METODOS
 	void (* setSize)(Matrix *this);
-	void (* setN)(Matrix *this, int N);
+	void (* setN)(Matrix *this, float N);
 	void (* printM)(Matrix *this);
 };
 //DECLARACIÓN DE LOS METODOS
 
 void mSetSize(Matrix *this);
 void mPrintM(Matrix *this);
-void mSetN(Matrix *this, int N);
+void mSetN(Matrix *this, float N);
 
 //CONSTRUCTOR
 Matrix * newMatrix(int f, int c, char t);

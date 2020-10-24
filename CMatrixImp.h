@@ -1,6 +1,7 @@
 #include "CMatrixAlgebra.h"
 #include<stdlib.h>
 #include<stdio.h>
+#include<math.h>
 
 //CONSTRUCTOR
 Matrix * newMatrix(int f, int c, char t){
@@ -18,6 +19,7 @@ Matrix * newMatrix(int f, int c, char t){
 	return m;
 }
 //METODOS
+
 
 //--------------------------------ASIGNAR TAMAÑO A LA MATRIZ-----------------------------------
 void mSetSize(Matrix *this){
@@ -38,15 +40,27 @@ void mSetSize(Matrix *this){
 		}
 	}
 }
-void mSetN(Matrix *this, int N){
+void mSetN(Matrix *this, float N){
 	int i, j;
-	if(this->tipo='i')
+	if(this->tipo=='i')
 	{
-		
+		for(i=0; i<this->filas; i++)
+		{
+			for(j=0; j<this->columnas; j++)
+			{
+				this->iM[i][j]=floor(N);
+			}
+		}
 	}
-	else if()
+	else if(this->tipo=='f')
 	{
-		
+		for(i=0; i<this->filas; i++)
+		{
+			for(j=0; j<this->columnas; j++)
+			{
+				this->fM[i][j]=N;
+			}
+		}
 	}
 }
 //------------------------------------IMPRIMIR MATRIZ------------------------------------------
@@ -59,7 +73,7 @@ void mPrintM(Matrix *this)
 		{
 			for(j=0; j<this->columnas; j++)
 			{
-				printf(" [] ");
+				printf(" [%d] ", this->iM[i][j]);
 			}
 			printf("\n");
 		}
@@ -70,7 +84,7 @@ void mPrintM(Matrix *this)
 		{
 			for(j=0; j<this->columnas; j++)
 			{
-				printf(" [] ");
+				printf(" [%.2f] ", this->fM[i][j]);
 			}
 			printf("\n");
 		}

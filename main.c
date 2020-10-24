@@ -1,8 +1,8 @@
 #include<stdio.h>
-#include<math.h>
 #include "CMatrixImp.h"
 main()
 {
-	Matrix *m= newMatrix(10, 15, 'i');
+	Matrix *m= newMatrix(4, 5, 'f');
+	m->setN(m, 2.8);
 	m->printM(m);
 }
