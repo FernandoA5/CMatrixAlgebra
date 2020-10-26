@@ -2,11 +2,10 @@
 #include "CMatrixImp.h"
 main()
 {
-	Matrix *m= newMatrix(2, 2, 'i');
-	m->setN(m, 2.8);
-	m->printM(m);
+	Matrix *m= newMatrix(4, 3, 'f');
+	//m->setN(m, 2);
 	m->setByDataSet(m, "DataSet.txt");
-	
+	m->printM(m);
 	printf("\n##########################\n");
 	printf("Promedio: %.2f", m->avgM(m));
 }

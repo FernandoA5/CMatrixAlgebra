@@ -15,24 +15,67 @@ Matrix * newMatrix(int f, int c, char t){
 	m->setN=mSetN;
 	m->avgM=mAvgM;
 	m->setByDataSet=mSetByDataSet;
-	
+	m->setSmartSize=mSetSmartSize;
 	
 	
 	m->setSize(m);
 	return m;
 }
 //METODOS
+/*------------------------SETBYDATASET---------------------------------------*/
 void mSetByDataSet(Matrix *this, char dir[])
 {
+	char aux[10]; int contador=0, i, sub1=0, sub2; float *nums;
 	//ABRIMOS EL ARCHIVO
 	FILE *f=fopen(dir, "r");
-	if(f==NULL)
+	printf("%s", (f==NULL)?"Error al abrir el archivo\n":"Archivo Abierto con exito\n");
+	//CONTAMOS LOS NUMEROS Y LOS GUARDAMOS EN UN ARREGLO
+	while(!feof(f))
 	{
-		printf("ERROR AL ABRIR EL ARCHIVO");
+		fgets(aux, 10, f);
+		contador++;
+		nums=realloc(nums, sizeof(float)*contador);
+		nums[contador-1]=atof(aux);
 	}
-	char aux[6];
+	rewind(f);
+	//CAMBIAMOS EL TAMAÑO DE LA MATRIZ PARA ALMACENAR LOS DATOS OBTENIDOS DEL ARCHIVO
+	mSetSmartSize(this, contador);
+	//GUARDAMOS LOS DATOS DEL ARCHIVO
+	printf("\n");
+	if(this->tipo=='i')
+	{
+		for(i=0; i<this->filas*this->columnas; i++)
+		{
+			sub1=(sub2==this->columnas-1)?sub1+1:sub1;
+			sub2=i%this->columnas;
+			this->iM[sub1][sub2]=(i<contador)?(int)nums[i]:0;				
+		}
+	}
+	else if(this->tipo=='f')
+	{
+		for(i=0; i<this->filas*this->columnas; i++)
+		{
+			sub1=(sub2==this->columnas-1)?sub1+1:sub1;
+			sub2=i%this->columnas;
+			this->fM[sub1][sub2]=(i<contador)?nums[i]:0;				
+		}
+	}
+	
+	fclose(f);
 }
-
+/*------------------------SETSMARTSIZE---------------------------------------*/
+void mSetSmartSize(Matrix *this, int n)
+{
+	int a, b;
+	a=(int)sqrt(n);
+	do{
+		b++;
+	}while(a*b<n);
+	this->filas=a;
+	this->columnas=b;
+	mSetSize(this);
+	printf("Fil:%d || Col: %d", a, b);
+}
 //--------------------------------ASIGNAR TAMAÑO A LA MATRIZ-----------------------------------
 void mSetSize(Matrix *this){
 	int i;
